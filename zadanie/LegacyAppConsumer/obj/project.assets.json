@@ -27,19 +27,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/pgago/.nuget/packages/": {}
+    "C:\\Users\\Kacpi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pgago/Projects/PJATK/classes-materials/APBD/lecture_3/zadanie/LegacyAppConsumer/LegacyAppConsumer.csproj",
+      "projectUniqueName": "C:\\Users\\Kacpi\\Desktop\\APBD4\\zadanie\\LegacyAppConsumer\\LegacyAppConsumer.csproj",
       "projectName": "LegacyAppConsumer",
-      "projectPath": "/Users/pgago/Projects/PJATK/classes-materials/APBD/lecture_3/zadanie/LegacyAppConsumer/LegacyAppConsumer.csproj",
-      "packagesPath": "/Users/pgago/.nuget/packages/",
-      "outputPath": "/Users/pgago/Projects/PJATK/classes-materials/APBD/lecture_3/zadanie/LegacyAppConsumer/obj/",
+      "projectPath": "C:\\Users\\Kacpi\\Desktop\\APBD4\\zadanie\\LegacyAppConsumer\\LegacyAppConsumer.csproj",
+      "packagesPath": "C:\\Users\\Kacpi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Kacpi\\Desktop\\APBD4\\zadanie\\LegacyAppConsumer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pgago/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Kacpi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -51,8 +51,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/pgago/Projects/PJATK/classes-materials/APBD/lecture_3/zadanie/LegacyApp/LegacyApp.csproj": {
-              "projectPath": "/Users/pgago/Projects/PJATK/classes-materials/APBD/lecture_3/zadanie/LegacyApp/LegacyApp.csproj"
+            "C:\\Users\\Kacpi\\Desktop\\APBD4\\zadanie\\LegacyApp\\LegacyApp.csproj": {
+              "projectPath": "C:\\Users\\Kacpi\\Desktop\\APBD4\\zadanie\\LegacyApp\\LegacyApp.csproj"
             }
           }
         }
@@ -61,6 +61,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -82,7 +87,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

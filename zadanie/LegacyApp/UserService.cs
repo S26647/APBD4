@@ -4,34 +4,37 @@ namespace LegacyApp
 {
     public class UserService
     {
-        public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
+        private IClientRepository _clientRepository;
+        private ICreditService _creditService;
+        private IUserValidator _userValidator;
+
+        public UserService()
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            _clientRepository = new ClientRepository();
+            _creditService = new UserCreditService();
+            _userValidator = new UserValidator();
+        }
+
+        public UserService(IClientRepository clientRepository, ICreditService creditService, IUserValidator userValidator)
+        {
+            _clientRepository = clientRepository;
+            _creditService = creditService;
+            _userValidator = userValidator;
+        }
+        public bool AddUser(string firstName, string lastName, string email, DateTime birthDate, int clientId)
+        {
+            if (!_userValidator.Validate(firstName, lastName, email, birthDate))
             {
                 return false;
             }
-
-            if (!email.Contains("@") && !email.Contains("."))
-            {
-                return false;
-            }
-
-            var now = DateTime.Now;
-            int age = now.Year - dateOfBirth.Year;
-            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
-
-            if (age < 21)
-            {
-                return false;
-            }
-
-            var clientRepository = new ClientRepository();
-            var client = clientRepository.GetById(clientId);
+            
+            
+            var client = _clientRepository.GetById(clientId);
 
             var user = new User
             {
                 Client = client,
-                DateOfBirth = dateOfBirth,
+                DateOfBirth = birthDate,
                 EmailAddress = email,
                 FirstName = firstName,
                 LastName = lastName
@@ -43,21 +46,15 @@ namespace LegacyApp
             }
             else if (client.Type == "ImportantClient")
             {
-                using (var userCreditService = new UserCreditService())
-                {
-                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
-                    creditLimit = creditLimit * 2;
-                    user.CreditLimit = creditLimit;
-                }
+                int creditLimit = _creditService.GetCreditLimit(user.LastName, user.DateOfBirth);
+                creditLimit *= 2;
+                user.CreditLimit = creditLimit;
             }
             else
             {
                 user.HasCreditLimit = true;
-                using (var userCreditService = new UserCreditService())
-                {
-                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
-                    user.CreditLimit = creditLimit;
-                }
+                int creditLimit = _creditService.GetCreditLimit(user.LastName, user.DateOfBirth);
+                user.CreditLimit = creditLimit;
             }
 
             if (user.HasCreditLimit && user.CreditLimit < 500)
